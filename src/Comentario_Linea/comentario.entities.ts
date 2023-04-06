@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'comentario_linea' })
-export class Comentario {
+class Comentario {
   @PrimaryGeneratedColumn()
   com_id: number;
 
@@ -24,3 +24,5 @@ export class Comentario {
   @JoinColumn({ name: 'com_idLinea' })
   linea: Lineas;
 }
+
+export { Comentario };

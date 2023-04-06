@@ -2,7 +2,7 @@ import { Usuario } from 'src/Usuarios/usuario.entities';
 import { Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity({ name: 'Administrador_sistema' })
-export class AdminSistema {
+class AdminSistema {
   @PrimaryGeneratedColumn()
   admin_id: number;
 
@@ -10,3 +10,5 @@ export class AdminSistema {
   @JoinColumn({ name: 'admin_idUsuario' })
   adminUsuario: Usuario;
 }
+
+export { AdminSistema };

@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'Parada' })
-export class Parada {
+class Parada {
   @PrimaryGeneratedColumn()
   par_id: number;
 
@@ -33,3 +33,5 @@ export class Parada {
   @ManyToMany(() => Usuario, (usuario) => usuario.paradas)
   usuarios: Usuario[];
 }
+
+export { Parada };

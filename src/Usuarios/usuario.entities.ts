@@ -12,7 +12,7 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'Usuario' })
-export class Usuario {
+class Usuario {
   @PrimaryGeneratedColumn()
   usu_id: number;
 
@@ -45,3 +45,5 @@ export class Usuario {
   })
   paradas: Parada[];
 }
+
+export { Usuario };

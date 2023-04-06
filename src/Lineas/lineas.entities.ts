@@ -3,7 +3,7 @@ import { Parada } from 'src/Paradas/paradas.entities';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'Lineas' })
-export class Lineas {
+class Lineas {
   @PrimaryGeneratedColumn()
   lin_id: number;
 
@@ -31,3 +31,5 @@ export class Lineas {
   @OneToMany(() => Parada, (linea) => linea.linea)
   paradas: Parada[];
 }
+
+export { Lineas };
