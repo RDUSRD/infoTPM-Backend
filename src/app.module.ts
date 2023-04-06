@@ -6,7 +6,7 @@ import { lineaModule } from './Lineas/lineas.module';
 import { paradaModule } from './Paradas/paradas.module';
 import { usuarioModule } from './Usuarios/usuario.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER } from './config';
+import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from './config';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER } from './config';
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: DB_HOST,
-      port: 3306,
+      port: parseInt(DB_PORT),
       username: DB_USER,
       password: DB_PASSWORD,
       database: DB_NAME,
