@@ -18,7 +18,7 @@ import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from './config';
       username: DB_USER,
       password: DB_PASSWORD,
       database: DB_NAME,
-      entities: ['./**/*.entities{.ts,.js}'],
+      entities: ['src/**/*.entities{.ts,.js}'],
       synchronize: true,
       // autoLoadEntities: true,
     }),

@@ -1,11 +1,5 @@
 import { Usuario } from 'src/Usuarios/usuario.entities';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
-  Column,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity({ name: 'Administrador_sistema' })
 export class AdminSistema {
