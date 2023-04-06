@@ -6,17 +6,18 @@ import { lineaModule } from './Lineas/lineas.module';
 import { paradaModule } from './Paradas/paradas.module';
 import { usuarioModule } from './Usuarios/usuario.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER } from './config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: DB_HOST,
       port: 3306,
-      username: 'root',
-      password: '',
-      database: 'infotpm',
+      username: DB_USER,
+      password: DB_PASSWORD,
+      database: DB_NAME,
       entities: ['./**/*.entities{.ts,.js}'],
       synchronize: true,
       // autoLoadEntities: true,
