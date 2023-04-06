@@ -1,18 +1,11 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  ParseIntPipe,
-} from '@nestjs/common';
+import { Controller, Delete, Get, Param, ParseIntPipe } from '@nestjs/common';
 
 import { AdminService } from './admin.service';
-import { createAdminDto, updateAdminDto } from './admin.dto';
+// import { createAdminDto, updateAdminDto } from './admin.dto';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('lineas')
+@ApiTags('Administrador')
+@Controller('administrador')
 export class adminController {
   constructor(private adminService: AdminService) {}
 
@@ -26,20 +19,20 @@ export class adminController {
     return this.adminService.findOne(id);
   }
 
-  @Post('create')
-  create(@Body() payload: createAdminDto) {
-    return this.adminService.create(payload);
-  }
+  // @Post('create')
+  // create(@Body() payload: createAdminDto) {
+  //   return this.adminService.create(payload);
+  // }
 
-  @Put('update/:id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() payload: updateAdminDto,
-  ) {
-    return this.adminService.update(id, payload);
-  }
+  // @Put('update/:id')
+  // update(
+  //   @Param('id', ParseIntPipe) id: number,
+  //   @Body() payload: updateAdminDto,
+  // ) {
+  //   return this.adminService.update(id, payload);
+  // }
 
-  @Delete('delete:id')
+  @Delete('delete/:id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.adminService.delete(id);
   }

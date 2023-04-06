@@ -11,8 +11,10 @@ import {
 
 import { ComentarioService } from './comentario.service';
 import { createComentDto, updateComentDto } from './comentario.dto';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('lineas')
+@ApiTags('Comentarios')
+@Controller('comentario')
 export class comentarioController {
   constructor(private comentarioService: ComentarioService) {}
 

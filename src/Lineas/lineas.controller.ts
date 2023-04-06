@@ -11,7 +11,9 @@ import {
 
 import { LineaService } from './lineas.service';
 import { createLineasDto, updatelineasDto } from './lineas.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Lineas')
 @Controller('lineas')
 export class lineaController {
   constructor(private lineaService: LineaService) {}

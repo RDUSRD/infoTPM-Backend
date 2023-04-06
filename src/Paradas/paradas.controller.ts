@@ -8,10 +8,12 @@ import {
   Put,
   ParseIntPipe,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { ParadaService } from './paradas.service';
 import { createParadaDto, updateParadaDto } from './paradas.dto';
 
+@ApiTags('paradas')
 @Controller('paradas')
 export class paradaController {
   constructor(private paradaService: ParadaService) {}
