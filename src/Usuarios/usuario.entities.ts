@@ -1,5 +1,5 @@
 import { SystemAdmin } from 'src/Administrador_S/admin.entities';
-import { Coment } from 'src/Comentario_Linea/comentario.entities';
+import { Comment } from 'src/Comentario_Linea/comentario.entities';
 import { Stops } from 'src/Paradas/paradas.entities';
 import {
   Entity,
@@ -37,8 +37,8 @@ class User {
   @OneToOne(() => SystemAdmin, (SystemAdmin) => SystemAdmin.adminUser)
   systemAdmin: SystemAdmin;
 
-  @OneToMany(() => Coment, (coment) => coment.User)
-  coment: Coment[];
+  @OneToMany(() => Comment, (comment) => comment.User)
+  comment: Comment[];
 
   @ManyToMany(() => Stops, (Stops) => Stops.User)
   @JoinTable({
