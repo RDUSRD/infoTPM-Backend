@@ -9,40 +9,40 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 
-import { ComentarioService } from './comentario.service';
+import { ComentService } from './comentario.service';
 import { createComentDto, updateComentDto } from './comentario.dto';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Comentarios')
-@Controller('comentario')
-export class comentarioController {
-  constructor(private comentarioService: ComentarioService) {}
+@ApiTags('Coments')
+@Controller('coment')
+export class comentController {
+  constructor(private comentService: ComentService) {}
 
   @Get()
   home() {
-    return this.comentarioService.findAll();
+    return this.comentService.findAll();
   }
 
   @Get(':id')
   getOne(@Param('id', ParseIntPipe) id: number) {
-    return this.comentarioService.findOne(id);
+    return this.comentService.findOne(id);
   }
 
   @Post('create')
   create(@Body() payload: createComentDto) {
-    return this.comentarioService.create(payload);
+    return this.comentService.create(payload);
   }
 
-  @Put('update/:id')
+  @Put(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: updateComentDto,
   ) {
-    return this.comentarioService.update(id, payload);
+    return this.comentService.update(id, payload);
   }
 
-  @Delete('delete:id')
+  @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
-    return this.comentarioService.delete(id);
+    return this.comentService.delete(id);
   }
 }

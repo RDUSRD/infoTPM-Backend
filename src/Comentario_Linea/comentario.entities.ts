@@ -1,5 +1,5 @@
-import { Lineas } from 'src/Lineas/lineas.entities';
-import { Usuario } from 'src/Usuarios/usuario.entities';
+import { Line } from 'src/Lineas/lineas.entities';
+import { User } from 'src/Usuarios/usuario.entities';
 import {
   Entity,
   Column,
@@ -8,21 +8,21 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-@Entity({ name: 'comentario_linea' })
-class Comentario {
+@Entity({ name: 'coment_line' })
+class Coment {
   @PrimaryGeneratedColumn()
   com_id: number;
 
   @Column()
-  com_comentario: string;
+  com_coment: string;
 
-  @ManyToOne(() => Usuario)
-  @JoinColumn({ name: 'com_idUsuario' })
-  usuario: Usuario;
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'com_idUser' })
+  User: User;
 
-  @ManyToOne(() => Lineas)
-  @JoinColumn({ name: 'com_idLinea' })
-  linea: Lineas;
+  @ManyToOne(() => Line)
+  @JoinColumn({ name: 'com_idLine' })
+  line: Line;
 }
 
-export { Comentario };
+export { Coment };

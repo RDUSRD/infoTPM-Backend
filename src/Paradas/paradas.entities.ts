@@ -1,5 +1,5 @@
-import { Lineas } from 'src/Lineas/lineas.entities';
-import { Usuario } from 'src/Usuarios/usuario.entities';
+import { Line } from 'src/Lineas/lineas.entities';
+import { User } from 'src/Usuarios/usuario.entities';
 import {
   Entity,
   Column,
@@ -9,29 +9,29 @@ import {
   ManyToMany,
 } from 'typeorm';
 
-@Entity({ name: 'Parada' })
-class Parada {
+@Entity({ name: 'Stops' })
+class Stops {
   @PrimaryGeneratedColumn()
   par_id: number;
 
   @Column({ unique: true })
-  par_nombre: string;
+  par_name: string;
 
   @Column()
-  par_latitud: string;
+  par_lat: string;
 
   @Column()
-  par_longitud: string;
+  par_long: string;
 
   @Column({ nullable: true })
-  par_descripcion: string;
+  par_description: string;
 
-  @ManyToOne(() => Lineas, (linea) => linea.paradas)
+  @ManyToOne(() => Line, (line) => line.stops)
   @JoinColumn({ name: 'par_linId' })
-  linea: Lineas;
+  Line: Line;
 
-  @ManyToMany(() => Usuario, (usuario) => usuario.paradas)
-  usuarios: Usuario[];
+  @ManyToMany(() => User, (User) => User.Stops)
+  User: User[];
 }
 
-export { Parada };
+export { Stops };

@@ -10,39 +10,39 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { ParadaService } from './paradas.service';
-import { createParadaDto, updateParadaDto } from './paradas.dto';
+import { StopService } from './paradas.service';
+import { createStopsDto, updateStopsDto } from './paradas.dto';
 
-@ApiTags('paradas')
-@Controller('paradas')
-export class paradaController {
-  constructor(private paradaService: ParadaService) {}
+@ApiTags('Stops')
+@Controller('stops')
+export class StopsController {
+  constructor(private stopsService: StopService) {}
 
   @Get()
   home() {
-    return this.paradaService.findAll();
+    return this.stopsService.findAll();
   }
 
   @Get(':id')
   getOne(@Param('id', ParseIntPipe) id: number) {
-    return this.paradaService.findOne(id);
+    return this.stopsService.findOne(id);
   }
 
   @Post('create')
-  create(@Body() payload: createParadaDto) {
-    return this.paradaService.create(payload);
+  create(@Body() payload: createStopsDto) {
+    return this.stopsService.create(payload);
   }
 
-  @Put('update/:id')
+  @Put(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() payload: updateParadaDto,
+    @Body() payload: updateStopsDto,
   ) {
-    return this.paradaService.update(id, payload);
+    return this.stopsService.update(id, payload);
   }
 
-  @Delete('delete:id')
+  @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
-    return this.paradaService.delete(id);
+    return this.stopsService.delete(id);
   }
 }

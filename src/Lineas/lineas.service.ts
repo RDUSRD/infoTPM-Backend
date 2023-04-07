@@ -4,55 +4,55 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Lineas } from './lineas.entities';
-import { createLineasDto, updatelineasDto } from './lineas.dto';
+import { Line } from './lineas.entities';
+import { createLineDto, updatelineDto } from './lineas.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class LineaService {
+export class LineService {
   constructor(
-    @InjectRepository(Lineas) private lineaRepository: Repository<Lineas>,
+    @InjectRepository(Line) private lineRepository: Repository<Line>,
   ) {}
 
   findAll() {
-    return this.lineaRepository.find;
+    return this.lineRepository.find();
   }
 
   async findOne(lin_id: number) {
-    return await this.lineaRepository.findOne({
+    return await this.lineRepository.findOne({
       where: { lin_id },
     });
   }
 
-  async create(payload: createLineasDto) {
-    const entidad = await this.lineaRepository.findOne({
-      where: { lin_nombre: payload.lin_nombre },
+  async create(payload: createLineDto) {
+    const entity = await this.lineRepository.findOne({
+      where: { lin_name: payload.lin_name },
     });
-    if (entidad) {
+    if (entity) {
       throw new HttpException('Usuario ya existente', HttpStatus.CONFLICT);
     }
-    const newUser = this.lineaRepository.create(payload);
-    this.lineaRepository.save(newUser);
+    const newUser = this.lineRepository.create(payload);
+    this.lineRepository.save(newUser);
   }
 
-  async update(lin_id: number, payload: updatelineasDto) {
-    const entidad = await this.lineaRepository.findOne({
+  async update(lin_id: number, payload: updatelineDto) {
+    const entity = await this.lineRepository.findOne({
       where: { lin_id },
     });
-    if (!entidad) {
+    if (!entity) {
       throw new NotFoundException(`Product #${lin_id} not found`);
     }
-    this.lineaRepository.update(lin_id, payload);
+    this.lineRepository.update(lin_id, payload);
   }
 
   async delete(lin_id: number) {
-    const entidad = await this.lineaRepository.findOne({
+    const entity = await this.lineRepository.findOne({
       where: { lin_id },
     });
-    if (!entidad) {
+    if (!entity) {
       throw new NotFoundException(`Product #${lin_id} not found`);
     }
-    return this.lineaRepository.delete({ lin_id });
+    return this.lineRepository.delete({ lin_id });
   }
 }

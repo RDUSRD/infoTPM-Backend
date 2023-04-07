@@ -1,14 +1,14 @@
-import { Usuario } from 'src/Usuarios/usuario.entities';
+import { User } from 'src/Usuarios/usuario.entities';
 import { Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
 
-@Entity({ name: 'Administrador_sistema' })
-class AdminSistema {
+@Entity({ name: 'System_Admin' })
+class SystemAdmin {
   @PrimaryGeneratedColumn()
   admin_id: number;
 
-  @OneToOne(() => Usuario)
-  @JoinColumn({ name: 'admin_idUsuario' })
-  adminUsuario: Usuario;
+  @OneToOne(() => User)
+  @JoinColumn({ name: 'admin_idUser' })
+  adminUser: User;
 }
 
-export { AdminSistema };
+export { SystemAdmin };

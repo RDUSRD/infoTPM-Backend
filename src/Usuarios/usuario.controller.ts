@@ -13,9 +13,9 @@ import { ApiTags } from '@nestjs/swagger';
 import { UserService } from './usuario.service';
 import { createUserDto, updateUserDto } from './usuario.dto';
 
-@ApiTags('Usuarios')
-@Controller('usuarios')
-export class usuarioController {
+@ApiTags('Users')
+@Controller('Users')
+export class userController {
   constructor(private userService: UserService) {}
 
   @Get()
@@ -33,7 +33,7 @@ export class usuarioController {
     return this.userService.create(payload);
   }
 
-  @Put('update/:id')
+  @Put(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: updateUserDto,
@@ -41,7 +41,7 @@ export class usuarioController {
     return this.userService.update(id, payload);
   }
 
-  @Delete('delete:id')
+  @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.userService.delete(id);
   }

@@ -4,8 +4,8 @@ import { AdminService } from './admin.service';
 // import { createAdminDto, updateAdminDto } from './admin.dto';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Administrador')
-@Controller('administrador')
+@ApiTags('Admin')
+@Controller('admin')
 export class adminController {
   constructor(private adminService: AdminService) {}
 

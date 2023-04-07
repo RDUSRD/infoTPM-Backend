@@ -1,6 +1,6 @@
-import { AdminSistema } from 'src/Administrador_S/admin.entities';
-import { Comentario } from 'src/Comentario_Linea/comentario.entities';
-import { Parada } from 'src/Paradas/paradas.entities';
+import { SystemAdmin } from 'src/Administrador_S/admin.entities';
+import { Coment } from 'src/Comentario_Linea/comentario.entities';
+import { Stops } from 'src/Paradas/paradas.entities';
 import {
   Entity,
   Column,
@@ -12,38 +12,41 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'Usuario' })
-class Usuario {
+class User {
   @PrimaryGeneratedColumn()
   usu_id: number;
 
   @Column()
-  usu_nombre: string;
+  usu_name: string;
 
   @Column()
-  usu_apellido: string;
+  usu_lastName: string;
 
   @Column()
   usu_email: string;
 
   @Column()
-  usu_fecha_nacimiento: string;
+  usu_birthday: string;
 
   @Column()
   usu_password: string;
 
-  @OneToOne(() => AdminSistema, (adminUsuario) => adminUsuario.adminUsuario)
-  adminUsuario: AdminSistema;
+  @Column()
+  usu_rol: string;
 
-  @OneToMany(() => Comentario, (usuario) => usuario.usuario)
-  comentarios: Comentario[];
+  @OneToOne(() => SystemAdmin, (SystemAdmin) => SystemAdmin.adminUser)
+  systemAdmin: SystemAdmin;
 
-  @ManyToMany(() => Parada, (Parada) => Parada.usuarios)
+  @OneToMany(() => Coment, (coment) => coment.User)
+  coment: Coment[];
+
+  @ManyToMany(() => Stops, (Stops) => Stops.User)
   @JoinTable({
-    name: 'parada_fav',
+    name: 'stops_fav',
     joinColumn: { name: 'par_id' },
     inverseJoinColumn: { name: 'usu_id' },
   })
-  paradas: Parada[];
+  Stops: Stops[];
 }
 
-export { Usuario };
+export { User };

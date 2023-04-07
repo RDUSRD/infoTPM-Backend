@@ -1,31 +1,31 @@
 import { IsString, IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
-import { PartialType } from '@nestjs/swagger';
+import { PartialType } from '@nestjs/mapped-types';
 
-export class createLineasDto {
+export class createLineDto {
   @IsString()
   @IsNotEmpty()
-  readonly lin_nombre: string;
-
-  @IsString()
-  @IsNotEmpty()
-  readonly lin_hora_inicio: string;
+  readonly lin_name: string;
 
   @IsString()
   @IsNotEmpty()
-  readonly lin_hora_salida: string;
+  readonly lin_start: string;
 
   @IsString()
   @IsNotEmpty()
-  readonly lin_punto_salida: string;
+  readonly lin_close: string;
 
   @IsString()
   @IsNotEmpty()
-  readonly lin_punto_llegada: string;
+  readonly lin_exit_point: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly lin_arrival_point: string;
 
   @IsNumber()
   @IsPositive()
   @IsNotEmpty()
-  readonly lin_precio: number;
+  readonly lin_price: number;
 }
 
-export class updatelineasDto extends PartialType(createLineasDto) {}
+export class updatelineDto extends PartialType(createLineDto) {}

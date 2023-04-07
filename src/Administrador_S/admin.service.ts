@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { AdminSistema } from './admin.entities';
+import { SystemAdmin } from './admin.entities';
 // import { createAdminDto, updateAdminDto } from './admin.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -7,12 +7,12 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class AdminService {
   constructor(
-    @InjectRepository(AdminSistema)
-    private adminRepository: Repository<AdminSistema>,
+    @InjectRepository(SystemAdmin)
+    private adminRepository: Repository<SystemAdmin>,
   ) {}
 
   findAll() {
-    return this.adminRepository.find;
+    return this.adminRepository.find();
   }
 
   async findOne(admin_id: number) {
@@ -37,10 +37,10 @@ export class AdminService {
   // }
 
   async delete(admin_id: number) {
-    const entidad = await this.adminRepository.findOne({
+    const entity = await this.adminRepository.findOne({
       where: { admin_id },
     });
-    if (!entidad) {
+    if (!entity) {
       throw new NotFoundException(`Product #${admin_id} not found`);
     }
     return this.adminRepository.delete({ admin_id });

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { adminModule } from './Administrador_S/admin.module';
-import { comentarioModule } from './Comentario_Linea/comentario.module';
-import { lineaModule } from './Lineas/lineas.module';
-import { paradaModule } from './Paradas/paradas.module';
-import { usuarioModule } from './Usuarios/usuario.module';
+import { comentModule } from './Comentario_Linea/comentario.module';
+import { lineModule } from './Lineas/lineas.module';
+import { stopsModule } from './Paradas/paradas.module';
+import { userModule } from './Usuarios/usuario.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from './config';
 
@@ -18,15 +18,16 @@ import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from './config';
       username: DB_USER,
       password: DB_PASSWORD,
       database: DB_NAME,
-      entities: ['src/**/*.entities{.ts,.js}'],
+      entities: [__dirname + 'src/**/*.entities.ts'],
       synchronize: true,
-      // autoLoadEntities: true,
+      autoLoadEntities: true,
+      dropSchema: true, //No usar en produccion.
     }),
-    usuarioModule,
-    lineaModule,
-    comentarioModule,
+    userModule,
+    lineModule,
+    comentModule,
     adminModule,
-    paradaModule,
+    stopsModule,
   ],
 })
 export class AppModule {}

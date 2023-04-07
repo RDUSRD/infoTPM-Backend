@@ -1,35 +1,35 @@
-import { Comentario } from 'src/Comentario_Linea/comentario.entities';
-import { Parada } from 'src/Paradas/paradas.entities';
+import { Coment } from 'src/Comentario_Linea/comentario.entities';
+import { Stops } from 'src/Paradas/paradas.entities';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
-@Entity({ name: 'Lineas' })
-class Lineas {
+@Entity({ name: 'Line' })
+class Line {
   @PrimaryGeneratedColumn()
   lin_id: number;
 
   @Column()
-  lin_nombre: string;
+  lin_name: string;
 
   @Column()
-  lin_hora_inicio: string;
+  lin_start: string;
 
   @Column()
-  lin_hora_cierre: string;
+  lin_close: string;
 
   @Column()
-  lin_punto_salida: string;
+  lin_exit_point: string;
 
   @Column()
-  lin_punto_llegada: string;
+  lin_arrival_point: string;
 
   @Column()
-  lin_precio: number;
+  lin_price: number;
 
-  @OneToMany(() => Comentario, (linea) => linea.linea)
-  comentarios: Comentario[];
+  @OneToMany(() => Coment, (Coment) => Coment.line)
+  coment: Coment[];
 
-  @OneToMany(() => Parada, (linea) => linea.linea)
-  paradas: Parada[];
+  @OneToMany(() => Stops, (Stops) => Stops.Line)
+  stops: Stops[];
 }
 
-export { Lineas };
+export { Line };

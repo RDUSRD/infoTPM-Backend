@@ -1,48 +1,48 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Comentario } from './comentario.entities';
+import { Coment } from './comentario.entities';
 import { createComentDto, updateComentDto } from './comentario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class ComentarioService {
+export class ComentService {
   constructor(
-    @InjectRepository(Comentario)
-    private comentarioRepository: Repository<Comentario>,
+    @InjectRepository(Coment)
+    private comentRepository: Repository<Coment>,
   ) {}
 
   findAll() {
-    return this.comentarioRepository.find;
+    return this.comentRepository.find();
   }
 
   async findOne(com_id: number) {
-    return await this.comentarioRepository.findOne({
+    return await this.comentRepository.findOne({
       where: { com_id },
     });
   }
 
   async create(payload: createComentDto) {
-    const newUser = this.comentarioRepository.create(payload);
-    this.comentarioRepository.save(newUser);
+    const newUser = this.comentRepository.create(payload);
+    this.comentRepository.save(newUser);
   }
 
   async update(com_id: number, payload: updateComentDto) {
-    const entidad = await this.comentarioRepository.findOne({
+    const entity = await this.comentRepository.findOne({
       where: { com_id },
     });
-    if (!entidad) {
+    if (!entity) {
       throw new NotFoundException(`Product #${com_id} not found`);
     }
-    this.comentarioRepository.update(com_id, payload);
+    this.comentRepository.update(com_id, payload);
   }
 
   async delete(com_id: number) {
-    const entidad = await this.comentarioRepository.findOne({
+    const entity = await this.comentRepository.findOne({
       where: { com_id },
     });
-    if (!entidad) {
+    if (!entity) {
       throw new NotFoundException(`Product #${com_id} not found`);
     }
-    return this.comentarioRepository.delete({ com_id });
+    return this.comentRepository.delete({ com_id });
   }
 }

@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { adminController } from './admin.controller';
-import { AdminSistema } from './admin.entities';
+import { SystemAdmin } from './admin.entities';
 import { AdminService } from './admin.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([AdminSistema])],
+  imports: [TypeOrmModule.forFeature([SystemAdmin])],
   controllers: [adminController],
   providers: [AdminService],
 })
