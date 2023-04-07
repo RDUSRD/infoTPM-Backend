@@ -1,4 +1,4 @@
-import { Coment } from 'src/Comentario_Linea/comentario.entities';
+import { Comment } from 'src/Comentario_Linea/comentario.entities';
 import { Stops } from 'src/Paradas/paradas.entities';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
@@ -25,8 +25,8 @@ class Line {
   @Column()
   lin_price: number;
 
-  @OneToMany(() => Coment, (Coment) => Coment.line)
-  coment: Coment[];
+  @OneToMany(() => Comment, (Comment) => Comment.line)
+  comment: Comment[];
 
   @OneToMany(() => Stops, (Stops) => Stops.Line)
   stops: Stops[];
