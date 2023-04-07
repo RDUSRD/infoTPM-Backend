@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { adminModule } from './Administrador_S/admin.module';
-import { comentModule } from './Comentario_Linea/comentario.module';
+import { commentModule } from './Comentario_Linea/comentario.module';
 import { lineModule } from './Lineas/lineas.module';
 import { stopsModule } from './Paradas/paradas.module';
 import { userModule } from './Usuarios/usuario.module';
@@ -21,11 +21,11 @@ import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from './config';
       entities: [__dirname + 'src/**/*.entities.ts'],
       synchronize: true,
       autoLoadEntities: true,
-      dropSchema: true, //No usar en produccion.
+      //dropSchema: true, //No usar en produccion.
     }),
     userModule,
     lineModule,
-    comentModule,
+    commentModule,
     adminModule,
     stopsModule,
   ],

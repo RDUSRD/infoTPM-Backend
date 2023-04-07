@@ -1,10 +1,10 @@
 import { IsString, IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
-export class createComentDto {
+export class createCommentDto {
   @IsString()
   @IsNotEmpty()
-  readonly com_coment: string;
+  readonly com_comment: string;
 
   @IsNumber()
   @IsPositive()
@@ -17,4 +17,4 @@ export class createComentDto {
   readonly com_idLine: number;
 }
 
-export class updateComentDto extends PartialType(createComentDto) {}
+export class updateCommentDto extends PartialType(createCommentDto) {}

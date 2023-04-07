@@ -8,13 +8,13 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-@Entity({ name: 'coment_line' })
-class Coment {
+@Entity({ name: 'comment_line' })
+class Comment {
   @PrimaryGeneratedColumn()
   com_id: number;
 
   @Column()
-  com_coment: string;
+  com_comment: string;
 
   @ManyToOne(() => User)
   @JoinColumn({ name: 'com_idUser' })
@@ -25,4 +25,4 @@ class Coment {
   line: Line;
 }
 
-export { Coment };
+export { Comment };
