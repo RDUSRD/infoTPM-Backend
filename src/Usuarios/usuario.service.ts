@@ -19,7 +19,7 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  async findOne(usu_id: number) {
+  async findByid(usu_id: number) {
     return await this.userRepository.findOne({
       where: { usu_id },
     });
@@ -29,7 +29,7 @@ export class UserService {
     const entity = await this.userRepository.findOne({
       where: { usu_email: payload.usu_email },
     });
-    if (!entity) {
+    if (entity) {
       throw new HttpException('Usuario ya existente', HttpStatus.CONFLICT);
     }
     const newUser = this.userRepository.create(payload);
