@@ -14,7 +14,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  // app.enableCors();
+  app.enableCors({ origin: ['https://infotpm.netlify.app/'] });
   await app.listen(PORT);
 }
 bootstrap();
