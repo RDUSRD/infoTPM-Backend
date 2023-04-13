@@ -44,8 +44,6 @@ export class UserService {
       throw new HttpException('Usuario ya existente', HttpStatus.CONFLICT);
     }
     const newUser = this.userRepository.create(payload);
-    const hashPassword = await bcrypt.hash(newUser.usu_password, 10);
-    newUser.usu_password = hashPassword;
     this.userRepository.save(newUser);
   }
 

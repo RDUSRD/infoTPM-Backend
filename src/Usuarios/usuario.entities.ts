@@ -29,7 +29,6 @@ class User {
   @Column()
   usu_birthday: string;
 
-  @Exclude()
   @Column()
   usu_password: string;
 
