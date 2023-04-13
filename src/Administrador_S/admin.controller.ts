@@ -1,4 +1,12 @@
-import { Controller, Delete, Get, Param, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  UseGuards,
+  SetMetadata,
+} from '@nestjs/common';
 
 import { AdminService } from './admin.service';
 // import { createAdminDto, updateAdminDto } from './admin.dto';

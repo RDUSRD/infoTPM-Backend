@@ -30,7 +30,7 @@ export class StopService {
       where: { par_name: payload.par_name },
     });
     if (entity) {
-      throw new HttpException('Usuario ya existente', HttpStatus.CONFLICT);
+      throw new HttpException('Parada ya existente', HttpStatus.CONFLICT);
     }
     const newstop = this.stopRepository.create(payload);
     this.stopRepository.save(newstop);

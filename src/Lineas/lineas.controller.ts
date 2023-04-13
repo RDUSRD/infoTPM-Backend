@@ -14,6 +14,7 @@ import { createLineDto, updatelineDto } from './lineas.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Lines')
+// @UseGuards(JwtAuthGuard)
 @Controller('line')
 export class lineController {
   constructor(private lineService: LineService) {}

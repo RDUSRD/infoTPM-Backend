@@ -1,5 +1,6 @@
 import { SystemAdmin } from 'src/Administrador_S/admin.entities';
 import { Comment } from 'src/Comentario_Linea/comentario.entities';
+import { Exclude } from 'class-transformer';
 import { Stops } from 'src/Paradas/paradas.entities';
 import {
   Entity,
@@ -28,6 +29,7 @@ class User {
   @Column()
   usu_birthday: string;
 
+  @Exclude()
   @Column()
   usu_password: string;
 

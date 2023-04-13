@@ -8,5 +8,6 @@ import { StopService } from './paradas.service';
   imports: [TypeOrmModule.forFeature([Stops])],
   controllers: [StopsController],
   providers: [StopService],
+  exports: [StopService],
 })
 export class stopsModule {}

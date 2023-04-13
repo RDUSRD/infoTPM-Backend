@@ -21,7 +21,7 @@ import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from './config';
       entities: [__dirname + 'src/**/*.entities.ts'],
       synchronize: true,
       autoLoadEntities: true,
-      // dropSchema: true, //No usar en produccion.
+      dropSchema: true, //No usar en produccion.
     }),
     userModule,
     lineModule,

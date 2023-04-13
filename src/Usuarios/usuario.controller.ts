@@ -11,7 +11,7 @@ import {
 
 import { ApiTags } from '@nestjs/swagger';
 import { UserService } from './usuario.service';
-import { createUserDto, updateUserDto } from './usuario.dto';
+import { addFav, createUserDto, updateUserDto } from './usuario.dto';
 
 @ApiTags('Users')
 @Controller('Users')
@@ -31,6 +31,11 @@ export class userController {
   @Post('create')
   create(@Body() payload: createUserDto) {
     return this.userService.create(payload);
+  }
+
+  @Post('AddFav')
+  addFav(@Body() payload: addFav) {
+    return this.userService.addStopsToFavorites(payload.usu_id, payload.par_id);
   }
 
   @Put(':id')
