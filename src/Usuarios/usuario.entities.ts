@@ -1,6 +1,5 @@
 import { SystemAdmin } from 'src/Administrador_S/admin.entities';
 import { Comment } from 'src/Comentario_Linea/comentario.entities';
-import { Exclude } from 'class-transformer';
 import { Stops } from 'src/Paradas/paradas.entities';
 import {
   Entity,

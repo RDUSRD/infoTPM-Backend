@@ -8,5 +8,6 @@ import { CommentService } from './comentario.service';
   imports: [TypeOrmModule.forFeature([Comment])],
   controllers: [commentController],
   providers: [CommentService],
+  exports: [CommentService],
 })
 export class commentModule {}

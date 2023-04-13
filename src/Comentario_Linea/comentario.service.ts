@@ -21,6 +21,15 @@ export class CommentService {
     });
   }
 
+  // Método para obtener comentarios por ID de usuario
+  async getCommentsByUserId(userId: number): Promise<Comment[]> {
+    return this.commentRepository
+      .createQueryBuilder('comment') // Usar createQueryBuilder para crear una consulta
+      .leftJoinAndSelect('comment.User', 'User') // Hacer un left join con la relación user en Comment
+      .where('User.usu_id = :userId', { userId }) // Filtrar por el campo userId en User
+      .getMany(); // Ejecutar la consulta y obtener los resultados
+  }
+
   async create(payload: createCommentDto) {
     const newUser = this.commentRepository.create(payload);
     this.commentRepository.save(newUser);

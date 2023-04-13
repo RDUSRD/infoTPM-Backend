@@ -35,7 +35,7 @@ export class userController {
 
   @Post('AddFav')
   addFav(@Body() payload: addFav) {
-    return this.userService.addStopsToFavorites(payload.usu_id, payload.par_id);
+    return this.userService.addStopToFavorites(payload.usu_id, payload.par_id);
   }
 
   @Put(':id')
