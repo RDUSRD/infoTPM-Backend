@@ -8,8 +8,9 @@ import { User } from './usuario.entities';
 import { createUserDto, updateUserDto } from './usuario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 import { StopService } from 'src/Paradas/paradas.service';
+import * as nodemailer from 'nodemailer';
+
 @Injectable()
 export class UserService {
   constructor(
@@ -84,5 +85,35 @@ export class UserService {
 
     // Guarda los cambios en la base de datos
     return this.userRepository.save(user);
+  }
+
+  async sendEmail(
+    to: string,
+    subject: string,
+    body: string,
+    variable: any,
+  ): Promise<void> {
+    // Crea un objeto de transporte de correo
+    const transporter = nodemailer.createTransport({
+      // Configura los detalles del servidor de correo
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // Usar SSL
+      auth: {
+        user: 'infotpm3@gmail.com', // Tu dirección de correo electrónico
+        pass: 'ozslbtiyvqqvtpif', // Tu contraseña de correo electrónico
+      },
+    });
+
+    // Configura los detalles del correo electrónico
+    const mailOptions = {
+      from: 'infotpm3@gmail.com', // Tu dirección de correo electrónico
+      to, // Dirección de correo electrónico del destinatario
+      subject, // Asunto del correo electrónico
+      html: `Hola, <br><br> Aquí está la variable: <b>${variable}</b><br><br> Saludos, <br> Tu aplicación`, // Cuerpo del correo electrónico (puedes usar HTML)
+    };
+
+    // Envía el correo electrónico
+    await transporter.sendMail(mailOptions);
   }
 }

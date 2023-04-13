@@ -4,10 +4,11 @@ import { userController } from './usuario.controller';
 import { User } from './usuario.entities';
 import { UserService } from './usuario.service';
 import { stopsModule } from 'src/Paradas/paradas.module';
+import { EmailController } from './email.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User]), stopsModule],
-  controllers: [userController],
+  controllers: [userController, EmailController],
   providers: [UserService],
   exports: [UserService],
 })
