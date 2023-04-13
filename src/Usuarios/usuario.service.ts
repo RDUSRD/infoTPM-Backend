@@ -104,6 +104,36 @@ export class UserService {
     await this.userRepository.save(user);
   }
 
+  async removeStopFromFavorites(userId: number, stopId: number): Promise<void> {
+    // Busca el usuario en la base de datos
+    const user = await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.Stops', 'Stops')
+      .where('user.usu_id = :userId', { userId })
+      .getOne();
+
+    // Verifica que el usuario exista
+    if (!user) {
+      throw new NotFoundException(`Usuario #${userId} no encontrado`);
+    }
+
+    // Busca la parada en la lista de paradas favoritas del usuario
+    const stopIndex = user.Stops.findIndex((stop) => stop.par_id === stopId);
+
+    // Verifica que la parada exista en la lista de favoritos del usuario
+    if (stopIndex === -1) {
+      throw new NotFoundException(
+        `Parada #${stopId} no encontrada en la lista de favoritos`,
+      );
+    }
+
+    // Elimina la parada de las paradas favoritas del usuario
+    user.Stops.splice(stopIndex, 1);
+
+    // Guarda los cambios en la base de datos
+    await this.userRepository.save(user);
+  }
+
   async sendEmail(
     to: string,
     subject: string,

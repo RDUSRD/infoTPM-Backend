@@ -38,6 +38,14 @@ export class userController {
     return this.userService.addStopToFavorites(payload.usu_id, payload.par_id);
   }
 
+  @Delete('AddFav/delete')
+  deleteFav(@Body() payload: addFav) {
+    return this.userService.removeStopFromFavorites(
+      payload.usu_id,
+      payload.par_id,
+    );
+  }
+
   @Put(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
