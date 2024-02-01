@@ -1,14 +1,14 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { createUserDto } from 'src/Usuarios/usuario.dto';
-import { UserService } from 'src/Usuarios/usuario.service';
+import { createUserDto } from './../../Usuarios/usuario.dto';
+import { UserService } from './../../Usuarios/usuario.service';
 import * as bcrypt from 'bcrypt';
 import { loginUserDto, loginAdminDto } from './../auth.dto';
 import { Roles } from '../auth.enum';
-import { createAdminDto } from 'src/admin/admin.dto';
-import { AdminService } from 'src/admin/admin.service';
-import { User } from 'src/Usuarios/usuario.entities';
-import { Admin } from 'src/admin/admin.entities';
+import { createAdminDto } from './../../admin/admin.dto';
+import { AdminService } from './../../admin/admin.service';
+import { User } from './../../Usuarios/usuario.entities';
+import { Admin } from './../../admin/admin.entities';
 
 @Injectable()
 export class AuthService {
