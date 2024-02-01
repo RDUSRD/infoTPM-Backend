@@ -21,9 +21,9 @@ import { UserLineModule } from './UserLine/UserLine.module';
       password: DB_PASSWORD,
       database: DB_NAME,
       entities: [__dirname + 'src/**/*.entities.ts'],
-      synchronize: true,
+      // synchronize: true,
       autoLoadEntities: true,
-      dropSchema: true, //No usar en produccion.
+      // dropSchema: true, //No usar en produccion.
     }),
     userModule,
     lineModule,
