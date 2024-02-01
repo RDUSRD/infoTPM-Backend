@@ -8,7 +8,7 @@ import { Roles } from '../auth.enum';
 import { createAdminDto } from './../../Admin/admin.dto';
 import { AdminService } from './../../Admin/admin.service';
 import { User } from './../../Usuarios/usuario.entities';
-import { Admin } from './../../admin/admin.entities';
+import { Admin } from './../../Admin/admin.entities';
 
 @Injectable()
 export class AuthService {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserLineController } from './Userline.controller';
+import { UserLineController } from './UserLine.controller';
 import { UserLine } from './UserLine.entities';
 import { UserLineService } from './UserLine.service';
 import { userModule } from 'src/Usuarios/usuario.module';
