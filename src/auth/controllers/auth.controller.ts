@@ -11,10 +11,10 @@ import { AuthService } from './../services/auth.service';
 import { createUserDto } from 'src/Usuarios/usuario.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { loginUserDto, loginAdminDto } from './../auth.dto';
-import { createAdminDto } from 'src/admin/admin.dto';
+import { createAdminDto } from 'src/Admin/admin.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/Usuarios/usuario.service';
-import { AdminService } from 'src/admin/admin.service';
+import { AdminService } from 'src/Admin/admin.service';
 
 @ApiTags('Auth')
 @Controller('Auth')

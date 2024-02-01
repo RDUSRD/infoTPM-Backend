@@ -6,7 +6,7 @@ import { AuthService } from './services/auth.service';
 import { JWT_SECRET } from '../config';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './controllers/auth.controller';
-import { adminModule } from 'src/admin/admin.module';
+import { adminModule } from 'src/Admin/admin.module';
 import { JwtMiddleware } from './auth.middleware';
 
 @Module({

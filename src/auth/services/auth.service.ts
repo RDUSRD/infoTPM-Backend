@@ -5,8 +5,8 @@ import { UserService } from './../../Usuarios/usuario.service';
 import * as bcrypt from 'bcrypt';
 import { loginUserDto, loginAdminDto } from './../auth.dto';
 import { Roles } from '../auth.enum';
-import { createAdminDto } from './../../admin/admin.dto';
-import { AdminService } from './../../admin/admin.service';
+import { createAdminDto } from './../../Admin/admin.dto';
+import { AdminService } from './../../Admin/admin.service';
 import { User } from './../../Usuarios/usuario.entities';
 import { Admin } from './../../admin/admin.entities';
 
