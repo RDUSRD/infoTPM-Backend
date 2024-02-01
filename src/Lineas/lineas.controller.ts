@@ -26,7 +26,7 @@ export class lineController {
 
   @Get(':id')
   getOne(@Param('id', ParseIntPipe) id: number) {
-    return this.lineService.findOne(id);
+    return this.lineService.findByid(id);
   }
 
   @Post('create')

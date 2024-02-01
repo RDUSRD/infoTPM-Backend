@@ -8,5 +8,6 @@ import { LineService } from './lineas.service';
   imports: [TypeOrmModule.forFeature([Line])],
   controllers: [lineController],
   providers: [LineService],
+  exports: [LineService],
 })
 export class lineModule {}

@@ -1,12 +1,10 @@
 import { Line } from 'src/Lineas/lineas.entities';
-import { User } from 'src/Usuarios/usuario.entities';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
-  ManyToMany,
 } from 'typeorm';
 
 @Entity({ name: 'Stops' })
@@ -26,12 +24,12 @@ class Stops {
   @Column({ nullable: true })
   par_description: string;
 
-  @ManyToOne(() => Line, (line) => line.stops)
+  @Column({ nullable: true })
+  par_img: string;
+
+  @ManyToOne(() => Line, (line) => line.stops, { nullable: false })
   @JoinColumn({ name: 'par_linId' })
   Line: Line;
-
-  @ManyToMany(() => User, (User) => User.Stops)
-  User: User[];
 }
 
 export { Stops };

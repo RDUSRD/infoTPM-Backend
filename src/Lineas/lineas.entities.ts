@@ -1,5 +1,6 @@
 import { Comment } from 'src/Comentario_Linea/comentario.entities';
 import { Stops } from 'src/Paradas/paradas.entities';
+import { UserLine } from 'src/UserLine/UserLine.entities';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'Line' })
@@ -30,6 +31,9 @@ class Line {
 
   @OneToMany(() => Stops, (Stops) => Stops.Line)
   stops: Stops[];
+
+  @OneToMany(() => UserLine, (userLine) => userLine.line)
+  userLine: UserLine[];
 }
 
 export { Line };

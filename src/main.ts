@@ -8,6 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
 
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('InfoTPM API')
     .setDescription('API of infotpm')
     .setVersion('2.0')

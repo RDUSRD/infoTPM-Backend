@@ -7,35 +7,25 @@ import {
 import { User } from './usuario.entities';
 import { createUserDto, updateUserDto } from './usuario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { StopService } from 'src/Paradas/paradas.service';
-import { CommentService } from './../Comentario_Linea/comentario.service';
-import * as nodemailer from 'nodemailer';
+import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
-    private stopsRepository: StopService,
-    private commentRepository: CommentService,
   ) {}
 
   async findAll() {
     const users = await this.userRepository.find({
-      relations: ['Stops'], // Corregir el nombre de la relación a 'comments'
+      relations: ['userLines', 'comment'],
     });
-    // for (const user of users) {
-    //   user.comment = await this.commentRepository.getCommentsByUserId(
-    //     user.usu_id,
-    //   ); // Llamar al método getCommentsByUserId con el userId del usuario
-    // }
     return users;
   }
 
   async findByid(usu_id: number) {
     return await this.userRepository.findOne({
       where: { usu_id },
-      relations: ['Stops'],
+      relations: ['userLines', 'comment'],
     });
   }
 
@@ -54,6 +44,7 @@ export class UserService {
     }
     const newUser = this.userRepository.create(payload);
     this.userRepository.save(newUser);
+    return newUser;
   }
 
   async update(usu_id: number, payload: updateUserDto) {
@@ -66,102 +57,22 @@ export class UserService {
     this.userRepository.update(usu_id, payload);
   }
 
-  async delete(usu_id: number) {
-    const entity = await this.userRepository.findOne({
-      where: { usu_id },
-    });
-    if (!entity) {
-      throw new NotFoundException(`Product #${usu_id} not found`);
+  async delete(usu_id: number): Promise<DeleteResult> {
+    try {
+      const entity = await this.userRepository.findOne({
+        where: { usu_id },
+      });
+      if (!entity) {
+        throw new NotFoundException(`User #${usu_id} not found`);
+      }
+      return await this.userRepository.delete({ usu_id });
+    } catch (error) {
+      if (error.message.includes('a foreign key constraint fails')) {
+        throw new NotFoundException(
+          `Cannot delete User #${usu_id} because it is associated with other entities`,
+        );
+      }
+      throw error;
     }
-    return this.userRepository.delete({ usu_id });
-  }
-
-  async addStopToFavorites(userId: number, stopId: number): Promise<void> {
-    // Busca el usuario en la base de datos
-    const user = await this.userRepository
-      .createQueryBuilder('user')
-      .leftJoinAndSelect('user.Stops', 'Stops')
-      .where('user.usu_id = :userId', { userId })
-      .getOne();
-
-    // Verifica que el usuario exista
-    if (!user) {
-      throw new NotFoundException(`Usuario #${userId} no encontrado`);
-    }
-
-    // Busca la parada en la base de datos
-    const stop = await this.stopsRepository.findOne(stopId);
-
-    // Verifica que la parada exista
-    if (!stop) {
-      throw new NotFoundException(`Parada #${stopId} no encontrada`);
-    }
-
-    // Agrega la parada a las paradas favoritas del usuario
-    user.Stops.push(stop);
-
-    // Guarda los cambios en la base de datos
-    await this.userRepository.save(user);
-  }
-
-  async removeStopFromFavorites(userId: number, stopId: number): Promise<void> {
-    // Busca el usuario en la base de datos
-    const user = await this.userRepository
-      .createQueryBuilder('user')
-      .leftJoinAndSelect('user.Stops', 'Stops')
-      .where('user.usu_id = :userId', { userId })
-      .getOne();
-
-    // Verifica que el usuario exista
-    if (!user) {
-      throw new NotFoundException(`Usuario #${userId} no encontrado`);
-    }
-
-    // Busca la parada en la lista de paradas favoritas del usuario
-    const stopIndex = user.Stops.findIndex((stop) => stop.par_id === stopId);
-
-    // Verifica que la parada exista en la lista de favoritos del usuario
-    if (stopIndex === -1) {
-      throw new NotFoundException(
-        `Parada #${stopId} no encontrada en la lista de favoritos`,
-      );
-    }
-
-    // Elimina la parada de las paradas favoritas del usuario
-    user.Stops.splice(stopIndex, 1);
-
-    // Guarda los cambios en la base de datos
-    await this.userRepository.save(user);
-  }
-
-  async sendEmail(
-    to: string,
-    subject: string,
-    body: string,
-    variable: any,
-  ): Promise<void> {
-    // Crea un objeto de transporte de correo
-    const transporter = nodemailer.createTransport({
-      // Configura los detalles del servidor de correo
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true, // Usar SSL
-      auth: {
-        user: 'infotpm3@gmail.com', // Tu dirección de correo electrónico
-        pass: 'ozslbtiyvqqvtpif', // Tu contraseña de correo electrónico
-      },
-    });
-
-    // Configura los detalles del correo electrónico
-    const mailOptions = {
-      from: 'infotpm3@gmail.com', // Tu dirección de correo electrónico
-      to, // Dirección de correo electrónico del destinatario
-      subject, // Asunto del correo electrónico
-      html: `<h1 style="text-align:center">Bienvenido</h1>
-      <p style="text-align:center">Se ha ingresado la siguiente contraseña:</p>
-      <input value="${variable}" style="display:block; margin:0 auto; padding:10px; font-size:16px; text-align:center" disabled>`, // Cuerpo del correo electrónico (puedes usar HTML)
-    };
-    // Envía el correo electrónico
-    await transporter.sendMail(mailOptions);
   }
 }

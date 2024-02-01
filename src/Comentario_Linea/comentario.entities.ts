@@ -16,11 +16,11 @@ class Comment {
   @Column()
   com_comment: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { nullable: false })
   @JoinColumn({ name: 'com_idUser' })
   User: User;
 
-  @ManyToOne(() => Line)
+  @ManyToOne(() => Line, { nullable: false })
   @JoinColumn({ name: 'com_idLine' })
   line: Line;
 }

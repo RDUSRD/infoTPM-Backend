@@ -1,24 +1,30 @@
-import { Module } from '@nestjs/common';
-import { PassportModule } from '@nestjs/passport';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { userModule } from 'src/Usuarios/usuario.module';
 import { AuthService } from './services/auth.service';
-import { LocalStrategy } from './strategies/local.strategy';
+import { JWT_SECRET } from '../config';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { userModule } from './../Usuarios/usuario.module';
 import { AuthController } from './controllers/auth.controller';
+import { adminModule } from 'src/admin/admin.module';
+import { JwtMiddleware } from './auth.middleware';
 
 @Module({
   imports: [
     userModule,
     PassportModule,
+    adminModule,
     JwtModule.register({
-      secret: 'hola',
-      signOptions: {
-        expiresIn: '1d',
-      },
+      secret: JWT_SECRET,
+      signOptions: { expiresIn: '2h' },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],
+  providers: [AuthService, JwtStrategy],
+  exports: [AuthService],
 })
-export class AuthModule {}
+export class AuthModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(JwtMiddleware).forRoutes('*');
+  }
+}

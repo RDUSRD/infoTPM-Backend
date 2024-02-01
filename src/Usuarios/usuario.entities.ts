@@ -1,15 +1,6 @@
-import { SystemAdmin } from 'src/Administrador_S/admin.entities';
 import { Comment } from 'src/Comentario_Linea/comentario.entities';
-import { Stops } from 'src/Paradas/paradas.entities';
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  OneToMany,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
+import { UserLine } from 'src/UserLine/UserLine.entities';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'Usuario' })
 class User {
@@ -26,27 +17,13 @@ class User {
   usu_email: string;
 
   @Column()
-  usu_birthday: string;
-
-  @Column()
   usu_password: string;
-
-  @Column()
-  usu_rol: string;
-
-  @OneToOne(() => SystemAdmin, (SystemAdmin) => SystemAdmin.adminUser)
-  systemAdmin: SystemAdmin;
 
   @OneToMany(() => Comment, (comment) => comment.User)
   comment: Comment[];
 
-  @ManyToMany(() => Stops, (Stops) => Stops.User)
-  @JoinTable({
-    name: 'stops_fav',
-    joinColumn: { name: 'par_id' },
-    inverseJoinColumn: { name: 'usu_id' },
-  })
-  Stops: Stops[];
+  @OneToMany(() => UserLine, (userLine) => userLine.user)
+  userLines: UserLine[];
 }
 
 export { User };

@@ -16,7 +16,7 @@ export class StopService {
   ) {}
 
   findAll() {
-    return this.stopRepository.find();
+    return this.stopRepository.find({ relations: ['Line'] });
   }
 
   async findOne(par_id: number) {

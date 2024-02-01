@@ -1,16 +1,17 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
   Param,
   ParseIntPipe,
-  UseGuards,
-  SetMetadata,
+  Post,
+  Put,
 } from '@nestjs/common';
 
 import { AdminService } from './admin.service';
-// import { createAdminDto, updateAdminDto } from './admin.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { createAdminDto, updateAdminDto } from './admin.dto';
 
 @ApiTags('Admin')
 @Controller('admin')
@@ -24,21 +25,21 @@ export class adminController {
 
   @Get(':id')
   getOne(@Param('id', ParseIntPipe) id: number) {
-    return this.adminService.findOne(id);
+    return this.adminService.findByid(id);
   }
 
-  // @Post('create')
-  // create(@Body() payload: createAdminDto) {
-  //   return this.adminService.create(payload);
-  // }
+  @Post('create')
+  create(@Body() payload: createAdminDto) {
+    return this.adminService.create(payload);
+  }
 
-  // @Put('update/:id')
-  // update(
-  //   @Param('id', ParseIntPipe) id: number,
-  //   @Body() payload: updateAdminDto,
-  // ) {
-  //   return this.adminService.update(id, payload);
-  // }
+  @Put('update/:id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() payload: updateAdminDto,
+  ) {
+    return this.adminService.update(id, payload);
+  }
 
   @Delete('delete/:id')
   delete(@Param('id', ParseIntPipe) id: number) {

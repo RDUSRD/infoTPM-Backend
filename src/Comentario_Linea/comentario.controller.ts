@@ -25,7 +25,7 @@ export class commentController {
 
   @Get(':id')
   getOne(@Param('id', ParseIntPipe) id: number) {
-    return this.commentService.findOne(id);
+    return this.commentService.findByid(id);
   }
 
   @Post('create')

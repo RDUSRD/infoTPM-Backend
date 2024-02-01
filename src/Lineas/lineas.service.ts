@@ -7,7 +7,7 @@ import {
 import { Line } from './lineas.entities';
 import { createLineDto, updatelineDto } from './lineas.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class LineService {
@@ -19,7 +19,7 @@ export class LineService {
     return this.lineRepository.find();
   }
 
-  async findOne(lin_id: number) {
+  async findByid(lin_id: number) {
     return await this.lineRepository.findOne({
       where: { lin_id },
     });
@@ -46,13 +46,22 @@ export class LineService {
     this.lineRepository.update(lin_id, payload);
   }
 
-  async delete(lin_id: number) {
-    const entity = await this.lineRepository.findOne({
-      where: { lin_id },
-    });
-    if (!entity) {
-      throw new NotFoundException(`Product #${lin_id} not found`);
+  async delete(lin_id: number): Promise<DeleteResult> {
+    try {
+      const entity = await this.lineRepository.findOne({
+        where: { lin_id },
+      });
+      if (!entity) {
+        throw new NotFoundException(`Line #${lin_id} not found`);
+      }
+      return await this.lineRepository.delete({ lin_id });
+    } catch (error) {
+      if (error.message.includes('a foreign key constraint fails')) {
+        throw new NotFoundException(
+          `Cannot delete Line #${lin_id} because it is associated with other entities`,
+        );
+      }
+      throw error;
     }
-    return this.lineRepository.delete({ lin_id });
   }
 }
