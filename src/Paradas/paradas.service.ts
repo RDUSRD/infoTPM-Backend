@@ -15,7 +15,7 @@ export class StopService {
     @InjectRepository(Stops) private stopRepository: Repository<Stops>,
   ) {}
 
-  findAll() {
+  async findAll() {
     return this.stopRepository.find({ relations: ['Line'] });
   }
 
