@@ -65,7 +65,7 @@ export class StopService {
       entity.Line = line;
     }
 
-    this.stopRepository.update(par_id, payload);
+    this.stopRepository.update(par_id, entity);
   }
 
   async delete(par_id: number) {
