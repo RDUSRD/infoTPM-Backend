@@ -18,7 +18,7 @@ export class createStopsDto {
   readonly par_description: string;
 
   @IsNumber()
-  readonly Line: number;
+  readonly par_linId: number;
 }
 
 export class updateStopsDto extends PartialType(createStopsDto) {}
