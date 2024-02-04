@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
 import { PartialType } from '@nestjs/swagger';
 
 export class createStopsDto {
@@ -16,6 +16,9 @@ export class createStopsDto {
 
   @IsString()
   readonly par_description: string;
+
+  @IsNumber()
+  readonly Line: number;
 }
 
 export class updateStopsDto extends PartialType(createStopsDto) {}
