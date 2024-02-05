@@ -9,6 +9,7 @@ import { createStopsDto, updateStopsDto } from './paradas.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { LineService } from 'src/Lineas/lineas.service';
+import { access, unlink } from 'fs/promises';
 
 @Injectable()
 export class StopService {
@@ -22,11 +23,23 @@ export class StopService {
     return this.stopRepository.find({ relations: ['Line'] });
   }
 
-  async findOne(par_id: number) {
+  async findById(par_id: number) {
     return await this.stopRepository.findOne({
       where: { par_id },
       relations: ['Line'],
     });
+  }
+
+  async deleteImage(path: string): Promise<void> {
+    try {
+      await access(path);
+      await unlink(path);
+    } catch (error) {
+      // If the file doesn't exist, do nothing
+      if (error.code !== 'ENOENT') {
+        throw error;
+      }
+    }
   }
 
   async create(payload: createStopsDto) {
