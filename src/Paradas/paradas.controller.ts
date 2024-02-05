@@ -93,7 +93,7 @@ export class StopsController {
   @Put(':id')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(
-    FileInterceptor('use_img', {
+    FileInterceptor('par_img', {
       storage: diskStorage({
         destination: path.join(RAILWAY_VOLUME_MOUNT_PATH, '/images/stops'),
         filename: renameImage,
