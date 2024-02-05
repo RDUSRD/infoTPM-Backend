@@ -78,6 +78,12 @@ export class StopService {
       entity.Line = line;
     }
 
+    entity.par_img = payload.par_img;
+    entity.par_name = payload.par_name;
+    entity.par_lat = payload.par_lat;
+    entity.par_long = payload.par_long;
+    entity.par_description = payload.par_description;
+
     this.stopRepository.update(par_id, entity);
   }
 
