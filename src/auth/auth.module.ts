@@ -8,15 +8,17 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './controllers/auth.controller';
 import { adminModule } from 'src/Admin/admin.module';
 import { JwtMiddleware } from './auth.middleware';
+import { busModule } from 'src/busses/bus.module';
 
 @Module({
   imports: [
     userModule,
     PassportModule,
     adminModule,
+    busModule,
     JwtModule.register({
       secret: JWT_SECRET,
-      signOptions: { expiresIn: '2h' },
+      signOptions: { expiresIn: '1d' },
     }),
   ],
   controllers: [AuthController],

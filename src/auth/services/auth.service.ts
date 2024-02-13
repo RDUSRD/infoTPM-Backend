@@ -3,20 +3,25 @@ import { JwtService } from '@nestjs/jwt';
 import { createUserDto } from './../../Usuarios/usuario.dto';
 import { UserService } from './../../Usuarios/usuario.service';
 import * as bcrypt from 'bcrypt';
-import { loginUserDto, loginAdminDto } from './../auth.dto';
+import { loginUserDto, loginAdminDto, loginBusDto } from './../auth.dto';
 import { Roles } from '../auth.enum';
 import { createAdminDto } from './../../Admin/admin.dto';
 import { AdminService } from './../../Admin/admin.service';
 import { User } from './../../Usuarios/usuario.entities';
 import { Admin } from './../../Admin/admin.entities';
+import { BusService } from 'src/busses/bus.service';
+import { createBusDto } from 'src/busses/bus.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
     private adminService: AdminService,
+    private busService: BusService,
     private jwtTokenService: JwtService,
   ) {}
+
+  // AuthUser
 
   async validateUserCredentials(email: string, password: string): Promise<any> {
     const user = await this.userService.findByEmail(email);
@@ -123,6 +128,60 @@ export class AuthService {
       throw error;
     }
   }
+
+  // AuthBus
+
+  async validateBusCredentials(plate: string, password: string): Promise<any> {
+    const bus = await this.busService.findByPlate(plate);
+
+    if (bus && bcrypt.compareSync(password, bus.bus_password)) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { bus_password, ...result } = bus;
+      return result;
+    }
+    return null;
+  }
+
+  async loginBusWithCredentials(bus: any) {
+    const payload = {
+      plate: bus.bus_plate,
+      sub: bus.bus_id,
+      role: Roles.BUS,
+    };
+    return {
+      access_token: this.jwtTokenService.sign(payload),
+    };
+  }
+
+  async loginBus(payload: loginBusDto) {
+    const busValidated = await this.validateBusCredentials(
+      payload.plate,
+      payload.password,
+    );
+
+    if (busValidated) {
+      return this.loginBusWithCredentials(busValidated);
+    }
+    return null;
+  }
+
+  async registerBus(bus: createBusDto) {
+    try {
+      const salt = bcrypt.genSaltSync(10);
+      const hashedPassword = bcrypt.hashSync(bus.bus_password, salt);
+      bus.bus_password = hashedPassword;
+      const busCreated = await this.busService.create(bus);
+      if (!busCreated) {
+        throw new Error('Bus not created');
+      }
+      return busCreated;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  //JwtManagement
 
   async findByJWT(token: string): Promise<User> {
     const decodedToken = await this.jwtTokenService.verify(token);

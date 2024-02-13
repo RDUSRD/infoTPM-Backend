@@ -10,11 +10,13 @@ import {
 import { AuthService } from './../services/auth.service';
 import { createUserDto } from 'src/Usuarios/usuario.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { loginUserDto, loginAdminDto } from './../auth.dto';
+import { loginUserDto, loginAdminDto, loginBusDto } from './../auth.dto';
 import { createAdminDto } from 'src/Admin/admin.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/Usuarios/usuario.service';
 import { AdminService } from 'src/Admin/admin.service';
+import { BusService } from 'src/busses/bus.service';
+import { createBusDto } from 'src/busses/bus.dto';
 
 @ApiTags('Auth')
 @Controller('Auth')
@@ -24,20 +26,10 @@ export class AuthController {
     private jwtTokenService: JwtService,
     private userService: UserService,
     private adminService: AdminService,
+    private busService: BusService,
   ) {}
 
-  @Get('login/:email/:password')
-  async login(@Param('email') par1: string, @Param('password') par2: string) {
-    const payload = new loginUserDto();
-    payload.email = par1;
-    payload.password = par2;
-    const result = await this.authService.loginUser(payload);
-    if (result) {
-      return { success: true, data: result };
-    } else {
-      return { success: false, message: 'Invalid email or password' };
-    }
-  }
+  // JwtManagement
 
   @Get('findByToken/:Jwttoken')
   async getOneByToken(@Param('Jwttoken') Jwttoken: string) {
@@ -57,6 +49,21 @@ export class AuthController {
     return admin;
   }
 
+  // AuthUser
+
+  @Get('login/:email/:password')
+  async login(@Param('email') par1: string, @Param('password') par2: string) {
+    const payload = new loginUserDto();
+    payload.email = par1;
+    payload.password = par2;
+    const result = await this.authService.loginUser(payload);
+    if (result) {
+      return { success: true, data: result };
+    } else {
+      return { success: false, message: 'Invalid email or password' };
+    }
+  }
+
   @Post('register')
   async register(@Body() user: createUserDto) {
     const result = await this.authService.registerUser(user);
@@ -66,6 +73,8 @@ export class AuthController {
       return { success: false, message: 'Failed to register user' };
     }
   }
+
+  // AuthAdmin
 
   @Get('loginAdmin/:email/:password')
   async loginAdmin(
@@ -93,6 +102,37 @@ export class AuthController {
       return { success: true, data: result };
     } else {
       return { success: false, message: 'Failed to register admin' };
+    }
+  }
+
+  // AuthBus
+
+  @Get('loginBus/:plate/:password')
+  async loginBus(
+    @Param('plate') par1: string,
+    @Param('password') par2: string,
+  ) {
+    const payload = new loginBusDto();
+    payload.plate = par1;
+    payload.password = par2;
+    const result = await this.authService.loginBus(payload);
+    if (result) {
+      return {
+        success: true,
+        data: result,
+      };
+    } else {
+      return { success: false, message: 'Invalid plate or password' };
+    }
+  }
+
+  @Post('registerBus')
+  async registerBus(@Body() bus: createBusDto) {
+    const result = await this.authService.registerBus(bus);
+    if (result) {
+      return { success: true, data: result };
+    } else {
+      return { success: false, message: 'Failed to register bus' };
     }
   }
 }

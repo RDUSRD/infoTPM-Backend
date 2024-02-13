@@ -17,7 +17,7 @@ async function bootstrap() {
     .addBearerAuth()
     .setTitle('InfoTPM API')
     .setDescription('API of infotpm')
-    .setVersion('2.0')
+    .setVersion('3.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document, {

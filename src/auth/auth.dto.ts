@@ -24,3 +24,15 @@ export class loginAdminDto {
   @IsString()
   password: string;
 }
+
+export class loginBusDto {
+  @ApiProperty({ example: '123-ABC' })
+  @IsNotEmpty()
+  @IsString()
+  plate: string;
+
+  @ApiProperty({ example: '1234' })
+  @IsNotEmpty()
+  @IsString()
+  password: string;
+}

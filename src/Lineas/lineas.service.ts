@@ -30,7 +30,7 @@ export class LineService {
       where: { lin_name: payload.lin_name },
     });
     if (entity) {
-      throw new HttpException('Usuario ya existente', HttpStatus.CONFLICT);
+      throw new HttpException('Linea ya existente', HttpStatus.CONFLICT);
     }
     const newUser = this.lineRepository.create(payload);
     this.lineRepository.save(newUser);
@@ -41,7 +41,7 @@ export class LineService {
       where: { lin_id },
     });
     if (!entity) {
-      throw new NotFoundException(`Product #${lin_id} not found`);
+      throw new NotFoundException(`Linea #${lin_id} not found`);
     }
     this.lineRepository.update(lin_id, payload);
   }

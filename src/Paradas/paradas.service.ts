@@ -67,7 +67,7 @@ export class StopService {
       where: { par_id },
     });
     if (!entity) {
-      throw new NotFoundException(`Product #${par_id} not found`);
+      throw new NotFoundException(`Parada #${par_id} not found`);
     }
 
     if (payload.par_linId) {
@@ -92,7 +92,7 @@ export class StopService {
       where: { par_id },
     });
     if (!entity) {
-      throw new NotFoundException(`Product #${par_id} not found`);
+      throw new NotFoundException(`Parada #${par_id} not found`);
     }
     return this.stopRepository.delete({ par_id });
   }

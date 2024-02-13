@@ -52,7 +52,7 @@ export class UserService {
       where: { usu_id },
     });
     if (!entity) {
-      throw new NotFoundException(`Product #${usu_id} not found`);
+      throw new NotFoundException(`Usuario #${usu_id} not found`);
     }
     this.userRepository.update(usu_id, payload);
   }
