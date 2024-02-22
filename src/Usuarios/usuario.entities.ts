@@ -1,6 +1,13 @@
 import { Comment } from 'src/Comentario_Linea/comentario.entities';
 import { UserLine } from 'src/UserLine/UserLine.entities';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Bus } from 'src/busses/bus.entities';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 
 @Entity({ name: 'Usuario' })
 class User {
@@ -18,6 +25,12 @@ class User {
 
   @Column()
   usu_password: string;
+
+  @Column()
+  usu_role: string;
+
+  @OneToOne(() => Bus, (Bus) => Bus.bus_id, { nullable: true })
+  bus: Bus[];
 
   @OneToMany(() => Comment, (comment) => comment.User)
   comment: Comment[];

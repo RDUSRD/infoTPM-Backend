@@ -32,6 +32,14 @@ export class UserService {
   async findByEmail(usu_email: string) {
     return await this.userRepository.findOne({
       where: { usu_email },
+      relations: ['userLines', 'comment'],
+    });
+  }
+
+  async findByRole(usu_role: string) {
+    return await this.userRepository.find({
+      where: { usu_role },
+      relations: ['userLines', 'comment'],
     });
   }
 

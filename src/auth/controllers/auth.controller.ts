@@ -10,13 +10,12 @@ import {
 import { AuthService } from './../services/auth.service';
 import { createUserDto } from 'src/Usuarios/usuario.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { loginUserDto, loginAdminDto, loginBusDto } from './../auth.dto';
+import { loginUserDto, loginAdminDto } from './../auth.dto';
 import { createAdminDto } from 'src/Admin/admin.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/Usuarios/usuario.service';
 import { AdminService } from 'src/Admin/admin.service';
 import { BusService } from 'src/busses/bus.service';
-import { createBusDto } from 'src/busses/bus.dto';
 
 @ApiTags('Auth')
 @Controller('Auth')
@@ -102,37 +101,6 @@ export class AuthController {
       return { success: true, data: result };
     } else {
       return { success: false, message: 'Failed to register admin' };
-    }
-  }
-
-  // AuthBus
-
-  @Get('loginBus/:plate/:password')
-  async loginBus(
-    @Param('plate') par1: string,
-    @Param('password') par2: string,
-  ) {
-    const payload = new loginBusDto();
-    payload.plate = par1;
-    payload.password = par2;
-    const result = await this.authService.loginBus(payload);
-    if (result) {
-      return {
-        success: true,
-        data: result,
-      };
-    } else {
-      return { success: false, message: 'Invalid plate or password' };
-    }
-  }
-
-  @Post('registerBus')
-  async registerBus(@Body() bus: createBusDto) {
-    const result = await this.authService.registerBus(bus);
-    if (result) {
-      return { success: true, data: result };
-    } else {
-      return { success: false, message: 'Failed to register bus' };
     }
   }
 }

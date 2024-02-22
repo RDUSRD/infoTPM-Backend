@@ -37,6 +37,15 @@ export class createBusDto {
   readonly bus_status: string;
 
   @ApiProperty({
+    description: 'The user of the bus',
+    type: Number,
+    example: 1,
+  })
+  @IsNotEmpty()
+  @IsNumber()
+  readonly bus_usuId: number;
+
+  @ApiProperty({
     description: 'The line of the bus',
     type: Number,
     example: 1,
@@ -44,15 +53,6 @@ export class createBusDto {
   @IsNotEmpty()
   @IsNumber()
   readonly bus_linId: number;
-
-  @ApiProperty({
-    description: 'The password of the bus',
-    type: String,
-    example: '1234',
-  })
-  @IsNotEmpty()
-  @IsString()
-  bus_password: string;
 }
 
 export class updateBusDto extends PartialType(createBusDto) {}

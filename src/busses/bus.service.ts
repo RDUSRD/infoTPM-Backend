@@ -9,6 +9,7 @@ import { createBusDto, updateBusDto } from './bus.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { LineService } from 'src/Lineas/lineas.service';
+import { UserService } from 'src/Usuarios/usuario.service';
 
 @Injectable()
 export class BusService {
@@ -16,23 +17,26 @@ export class BusService {
     @InjectRepository(Bus) private busRepository: Repository<Bus>,
     // Inyectamos el servicio de lineas
     private lineService: LineService,
+
+    // Inyectamos el servicio de usuarios
+    private userService: UserService,
   ) {}
 
   async findAll() {
-    return this.busRepository.find({ relations: ['Line'] });
+    return this.busRepository.find({ relations: ['Line', 'user'] });
   }
 
   async findById(bus_id: number) {
     return await this.busRepository.findOne({
       where: { bus_id },
-      relations: ['Line'],
+      relations: ['Line', 'user'],
     });
   }
 
   async findByPlate(bus_plate: string) {
     return await this.busRepository.findOne({
       where: { bus_plate },
-      relations: ['Line'],
+      relations: ['Line', 'user'],
     });
   }
 
@@ -44,6 +48,12 @@ export class BusService {
       throw new HttpException('Bus ya existente', HttpStatus.CONFLICT);
     }
 
+    const user = await this.userService.findByid(payload.bus_usuId);
+
+    if (!user) {
+      throw new NotFoundException(`User #${payload.bus_usuId} not found`);
+    }
+
     const line = await this.lineService.findByid(payload.bus_linId);
 
     if (!line) {
@@ -52,6 +62,7 @@ export class BusService {
 
     const newbus = this.busRepository.create(payload);
     newbus.Line = line;
+    newbus.user = user;
 
     this.busRepository.save(newbus);
     return newbus;
@@ -63,6 +74,14 @@ export class BusService {
     });
     if (!entity) {
       throw new NotFoundException(`Bus #${bus_id} not found`);
+    }
+
+    if (payload.bus_usuId) {
+      const user = await this.userService.findByid(payload.bus_usuId);
+      if (!user) {
+        throw new NotFoundException(`User #${payload.bus_usuId} not found`);
+      }
+      entity.user = user;
     }
 
     if (payload.bus_linId) {

@@ -1,10 +1,12 @@
 import { Line } from 'src/Lineas/lineas.entities';
+import { User } from 'src/Usuarios/usuario.entities';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  OneToOne,
 } from 'typeorm';
 
 @Entity({ name: 'Bus' })
@@ -24,8 +26,9 @@ class Bus {
   @Column({ default: 'offline' })
   bus_status: string;
 
-  @Column()
-  bus_password: string;
+  @OneToOne(() => User, (User) => User.usu_id, { nullable: true })
+  @JoinColumn({ name: 'bus_usuId' })
+  user: User;
 
   @ManyToOne(() => Line, (line) => line.lin_id)
   @JoinColumn({ name: 'bus_linId' })
