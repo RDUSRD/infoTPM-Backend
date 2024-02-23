@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { lineController } from './lineas.controller';
-import { Line } from './lineas.entities';
+import { Line } from './lineas.entity';
 import { LineService } from './lineas.service';
 
 @Module({

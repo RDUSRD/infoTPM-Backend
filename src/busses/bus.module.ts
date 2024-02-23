@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BusController } from './bus.controller';
-import { Bus } from './bus.entities';
+import { Bus } from './bus.entity';
 import { BusService } from './bus.service';
 import { lineModule } from 'src/Lineas/lineas.module';
 import { userModule } from 'src/Usuarios/usuario.module';

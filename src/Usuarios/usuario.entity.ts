@@ -1,6 +1,6 @@
-import { Comment } from 'src/Comentario_Linea/comentario.entities';
-import { UserLine } from 'src/UserLine/UserLine.entities';
-import { Bus } from 'src/busses/bus.entities';
+import { Comment } from 'src/Comentario_Linea/comentario.entity';
+import { UserLine } from 'src/UserLine/UserLine.entity';
+import { Bus } from 'src/busses/bus.entity';
 import {
   Entity,
   Column,

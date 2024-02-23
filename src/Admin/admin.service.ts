@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Admin } from './admin.entities';
+import { Admin } from './admin.entity';
 import { createAdminDto, updateAdminDto } from './admin.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

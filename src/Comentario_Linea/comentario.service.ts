@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Comment } from './comentario.entities';
+import { Comment } from './comentario.entity';
 import { createCommentDto, updateCommentDto } from './comentario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

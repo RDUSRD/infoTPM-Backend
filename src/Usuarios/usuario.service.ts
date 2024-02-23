@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { User } from './usuario.entities';
+import { User } from './usuario.entity';
 import { createUserDto, updateUserDto } from './usuario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';

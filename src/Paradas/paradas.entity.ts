@@ -1,4 +1,4 @@
-import { Line } from 'src/Lineas/lineas.entities';
+import { Line } from 'src/Lineas/lineas.entity';
 import {
   Entity,
   Column,

@@ -1,5 +1,5 @@
-import { Line } from 'src/Lineas/lineas.entities';
-import { User } from 'src/Usuarios/usuario.entities';
+import { Line } from 'src/Lineas/lineas.entity';
+import { User } from 'src/Usuarios/usuario.entity';
 import {
   Entity,
   Column,
@@ -18,13 +18,16 @@ class Bus {
   bus_plate: string;
 
   @Column({ nullable: true })
-  bus_lat: number;
+  bus_lat: string;
 
   @Column({ nullable: true })
-  bus_lon: number;
+  bus_lon: string;
 
   @Column({ default: 'offline' })
   bus_status: string;
+
+  @Column({ nullable: true })
+  bus_linId: number;
 
   @OneToOne(() => User, (User) => User.usu_id, { nullable: true })
   @JoinColumn({ name: 'bus_usuId' })

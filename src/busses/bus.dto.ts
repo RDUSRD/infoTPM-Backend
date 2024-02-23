@@ -16,16 +16,16 @@ export class createBusDto {
     type: String,
     example: '123.0000',
   })
-  @IsNumber()
-  readonly bus_lat: number;
+  @IsString()
+  readonly bus_lat: string;
 
   @ApiProperty({
     description: 'The longitude of the bus',
     type: String,
     example: '123.0000',
   })
-  @IsNumber()
-  readonly bus_lon: number;
+  @IsString()
+  readonly bus_lon: string;
 
   @ApiProperty({
     description: 'The status of the bus',

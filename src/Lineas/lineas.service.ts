@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Line } from './lineas.entities';
+import { Line } from './lineas.entity';
 import { createLineDto, updatelineDto } from './lineas.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';

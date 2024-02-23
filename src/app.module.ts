@@ -22,7 +22,7 @@ import { busModule } from './busses/bus.module';
       password: DB_PASSWORD,
       database: DB_NAME,
       entities: [__dirname + 'src/**/*.entities.ts'],
-      // synchronize: true,
+      // synchronize: true, //No usar en produccion.
       autoLoadEntities: true,
       // dropSchema: true, //No usar en produccion.
     }),

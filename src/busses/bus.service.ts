@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Bus } from './bus.entities';
+import { Bus } from './bus.entity';
 import { createBusDto, updateBusDto } from './bus.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

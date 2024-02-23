@@ -1,5 +1,5 @@
-import { Line } from 'src/Lineas/lineas.entities';
-import { User } from 'src/Usuarios/usuario.entities';
+import { Line } from 'src/Lineas/lineas.entity';
+import { User } from 'src/Usuarios/usuario.entity';
 import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'UserLine' })

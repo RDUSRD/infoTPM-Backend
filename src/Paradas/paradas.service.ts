@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Stops } from './paradas.entities';
+import { Stops } from './paradas.entity';
 import { createStopsDto, updateStopsDto } from './paradas.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

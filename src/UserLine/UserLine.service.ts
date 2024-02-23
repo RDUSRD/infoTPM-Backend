@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UserLine } from './UserLine.entities';
+import { UserLine } from './UserLine.entity';
 import { CreateUserLineDto } from './UserLine.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

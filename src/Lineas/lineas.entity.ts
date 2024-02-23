@@ -1,6 +1,6 @@
-import { Comment } from 'src/Comentario_Linea/comentario.entities';
-import { Stops } from 'src/Paradas/paradas.entities';
-import { UserLine } from 'src/UserLine/UserLine.entities';
+import { Comment } from 'src/Comentario_Linea/comentario.entity';
+import { Stops } from 'src/Paradas/paradas.entity';
+import { UserLine } from 'src/UserLine/UserLine.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'Line' })
