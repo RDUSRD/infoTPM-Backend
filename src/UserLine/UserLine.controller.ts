@@ -13,7 +13,7 @@ export class UserLineController {
     return this.userLineService.findAll();
   }
 
-  @Get(':userid/:lineid')
+  @Get('/find/:userid/:lineid')
   getUserLineById(
     @Param('userid') userid: number,
     @Param('lineid') lineid: number,
@@ -21,16 +21,26 @@ export class UserLineController {
     return this.userLineService.findById(userid, lineid);
   }
 
+  @Get('/findbyid/:id')
+  getUserLineByid(@Param('id') id: number) {
+    return this.userLineService.findUserLineId(id);
+  }
+
   @Post('/create')
   createUserLine(@Body() payload: CreateUserLineDto) {
     return this.userLineService.create(payload);
   }
 
-  @Delete('/delete/:userid/:lineid')
+  @Delete('/delete/:id')
+  deleteUserLineById(@Param('id') id: number) {
+    return this.userLineService.delete(id);
+  }
+
+  @Delete('/deletebyids/:userid/:lineid')
   deleteUserLine(
     @Param('userid') userid: number,
     @Param('lineid') lineid: number,
   ) {
-    return this.userLineService.delete(userid, lineid);
+    return this.userLineService.deleteByIds(userid, lineid);
   }
 }

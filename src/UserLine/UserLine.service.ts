@@ -21,7 +21,9 @@ export class UserLineService {
   ) {}
 
   findAll() {
-    return this.userLineRepository.find();
+    return this.userLineRepository.find({
+      relations: ['user', 'line'],
+    });
   }
 
   async findById(userId: number, lineId: number) {
@@ -34,11 +36,21 @@ export class UserLineService {
 
     const userLine = await this.userLineRepository.findOne({
       where: { user: user, line: line },
+      relations: ['user', 'line'],
+    });
+
+    return userLine;
+  }
+
+  async findUserLineId(userLineId: number) {
+    const userLine = await this.userLineRepository.findOne({
+      where: { id: userLineId },
+      relations: ['user', 'line'],
     });
 
     if (!userLine) {
       throw new NotFoundException(
-        'No se encontró la relación entre el usuario y la línea',
+        `No se encontró la línea de usuario con ID #${userLineId}`,
       );
     }
 
@@ -66,7 +78,19 @@ export class UserLineService {
     return this.userLineRepository.save(newUserLine);
   }
 
-  async delete(userId: number, lineId: number) {
+  async delete(userLineId: number) {
+    const userLine = await this.findUserLineId(userLineId);
+
+    if (!userLine) {
+      throw new NotFoundException(
+        `No se encontró la línea de usuario con ID #${userLineId}`,
+      );
+    }
+
+    await this.userLineRepository.remove(userLine);
+  }
+
+  async deleteByIds(userId: number, lineId: number) {
     const user = await this.userService.findByid(userId);
     const line = await this.lineService.findByid(lineId);
 
@@ -74,16 +98,16 @@ export class UserLineService {
       throw new NotFoundException('Usuario o línea no encontrados');
     }
 
-    const existingUserLine = user.userLines.find(
-      (userLine) => userLine.line.lin_id === line.lin_id,
-    );
+    const userLine = await this.userLineRepository.findOne({
+      where: { user: user, line: line },
+    });
 
-    if (!existingUserLine) {
+    if (!userLine) {
       throw new NotFoundException(
-        `No se encontró la línea #${lineId} para el usuario #${userId}`,
+        'No se encontró la relación entre el usuario y la línea',
       );
     }
 
-    return this.userLineRepository.remove(existingUserLine);
+    await this.userLineRepository.remove(userLine);
   }
 }
