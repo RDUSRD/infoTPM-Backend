@@ -53,9 +53,7 @@ export class UserLineService {
       throw new NotFoundException('Usuario o línea no encontrados');
     }
 
-    const existingUserLine = user.userLines.find(
-      (userLine) => userLine.line.lin_id === line.lin_id,
-    );
+    const existingUserLine = await this.findById(user.usu_id, line.lin_id);
 
     if (existingUserLine) {
       throw new HttpException(
