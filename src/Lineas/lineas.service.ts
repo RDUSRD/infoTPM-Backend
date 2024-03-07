@@ -25,6 +25,31 @@ export class LineService {
     });
   }
 
+  async getLinesAndStopsPlane() {
+    return this.lineRepository
+      .createQueryBuilder('line')
+      .leftJoin('line.stops', 'stop')
+      .select([
+        'line.lin_name',
+        'line.lin_start',
+        'line.lin_close',
+        'line.lin_exit_point',
+        'line.lin_arrival_point',
+        'line.lin_price',
+        // Agrega aquí las demás columnas de line que necesitas
+        'stop.par_name',
+        'stop.par_description',
+      ])
+      .getRawMany();
+  }
+
+  async getLinesAndStops() {
+    return this.lineRepository
+      .createQueryBuilder('line')
+      .leftJoinAndSelect('line.stops', 'stop')
+      .getMany();
+  }
+
   async create(payload: createLineDto) {
     const entity = await this.lineRepository.findOne({
       where: { lin_name: payload.lin_name },

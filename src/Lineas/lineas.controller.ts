@@ -24,6 +24,16 @@ export class lineController {
     return this.lineService.findAll();
   }
 
+  @Get('linesAndStops')
+  getLinesAndStops() {
+    return this.lineService.getLinesAndStops();
+  }
+
+  @Get('linesAndStopsPlane')
+  getLinesAndStopsPlane() {
+    return this.lineService.getLinesAndStopsPlane();
+  }
+
   @Get(':id')
   getOne(@Param('id', ParseIntPipe) id: number) {
     return this.lineService.findByid(id);
