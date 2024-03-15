@@ -378,7 +378,7 @@ export class MailerService {
                                             <img
                                               align="center"
                                               border="0"
-                                              src="https://i.ibb.co/YPq663w/image-3.png"
+                                              src="https://i.ibb.co/tXB6xfV/Logo-i-TPM-png-01.png"
                                               alt="Image"
                                               title="Image"
                                               style="
@@ -390,7 +390,7 @@ export class MailerService {
                                                 border: none;
                                                 height: auto;
                                                 float: none;
-                                                width: 12%;
+                                                width: 15%;
                                                 max-width: 69.6px;
                                               "
                                               width="69.6"
@@ -428,7 +428,7 @@ export class MailerService {
                         overflow-wrap: break-word;
                         word-wrap: break-word;
                         word-break: break-word;
-                        background-color: #409192;
+                        background-color: #13684B;
                       "
                     >
                       <div
@@ -567,7 +567,7 @@ export class MailerService {
                                               color: #ffffff;
                                               font-family: Lato, sans-serif;
                                             "
-                                            >Bienvenido a Remesa España
+                                            >Bienvenido a infoTPM
                                           </span>
                                         </p>
                                       </div>
@@ -680,7 +680,7 @@ export class MailerService {
                                               line-height: 25.2px;
                                               color: #666666;
                                             "
-                                            >¡Bienvenida a RemesaEspana!</span
+                                            >¡Bienvenido a infoTPM!</span
                                           >
                                         </p>
                                         <p style="font-size: 14px; line-height: 140%">
@@ -694,26 +694,10 @@ export class MailerService {
                                               color: #666666;
                                             "
                                             >Estamos encantados de tenerte como parte
-                                            de nuestra comunidad.</span
-                                          >
-                                        </p>
-                                        <p style="font-size: 14px; line-height: 140%">
-                                           
-                                        </p>
-                                        <p style="font-size: 14px; line-height: 140%">
-                                          <span
-                                            style="
-                                              font-size: 18px;
-                                              line-height: 25.2px;
-                                              color: #666666;
-                                            "
-                                            >En RemesaEspana, nos enorgullece
+                                            de nuestra comunidad. Nos enorgullece
                                             brindarte un servicio de calidad y
-                                            garantizar tu satisfacción. Nuestro equipo
-                                            técnico está disponible para responder a
-                                            todas tus preguntas y ayudarte en lo que
-                                            necesites.
-                                          </span>
+                                            garantizar tu satisfacción.</span
+                                          >
                                         </p>
                                         <p style="font-size: 14px; line-height: 140%">
                                            
@@ -728,13 +712,6 @@ export class MailerService {
                                             >No dudes en contactarnos si tienes alguna
                                             duda o consulta.
                                           </span>
-                                        </p>
-      
-                                        <p style="font-size: 14px; line-height: 140%">
-                                           
-                                        </p>
-                                        <p style="font-size: 14px; line-height: 140%">
-                                          ¡Gracias por elegir RemesaEspana!
                                         </p>
                                       </div>
                                     </td>
@@ -855,7 +832,7 @@ export class MailerService {
                         overflow-wrap: break-word;
                         word-wrap: break-word;
                         word-break: break-word;
-                        background-color: #409192;
+                        background-color: #13684B;
                       "
                     >
                       <div
@@ -935,7 +912,7 @@ export class MailerService {
                                               line-height: 19.6px;
                                               color: #ecf0f1;
                                             "
-                                            >Madrid, España</span
+                                            >Zulia, Venezuela</span
                                           >
                                         </p>
                                         <p style="font-size: 14px; line-height: 140%">
@@ -945,8 +922,8 @@ export class MailerService {
                                               line-height: 19.6px;
                                               color: #ecf0f1;
                                             "
-                                            >+34 722 85 09 62 |
-                                            remesaespana@gmail.com</span
+                                            >+58 424 672 5408 |
+                                            infotpm3@gmail.com</span
                                           >
                                         </p>
                                       </div>
@@ -1038,29 +1015,6 @@ export class MailerService {
                                                     vertical-align: top;
                                                   "
                                                 >
-                                                  <a
-                                                    href="https://www.instagram.com/remesaespana/"
-                                                    title="Instagram"
-                                                    target="_blank"
-                                                  >
-                                                    <img
-                                                      src="https://i.ibb.co/mhFj6cz/image-2.png"
-                                                      alt="Instagram"
-                                                      title="Instagram"
-                                                      width="32"
-                                                      style="
-                                                        outline: none;
-                                                        text-decoration: none;
-                                                        -ms-interpolation-mode: bicubic;
-                                                        clear: both;
-                                                        display: block !important;
-                                                        border: none;
-                                                        height: auto;
-                                                        float: none;
-                                                        max-width: 32px !important;
-                                                      "
-                                                    />
-                                                  </a>
                                                 </td>
                                               </tr>
                                             </tbody>
@@ -1155,7 +1109,7 @@ export class MailerService {
                         overflow-wrap: break-word;
                         word-wrap: break-word;
                         word-break: break-word;
-                        background-color: #409192;
+                        background-color: #13684B;
                       "
                     >
                       <div
@@ -1383,7 +1337,7 @@ export class MailerService {
     };
 
     // Renderizamos el template con los datos del contexto utilizando Handlebars
-    const html = Handlebars.compile(`<!doctype html>
+    const html = Handlebars.compile(`<!DOCTYPE html>
     <html>
       <head>
         <!--[if gte mso 9]>
@@ -1466,7 +1420,7 @@ export class MailerService {
             line-height: inherit;
           }
     
-          a[x-apple-data-detectors='true'] {
+          a[x-apple-data-detectors="true"] {
             color: inherit !important;
             text-decoration: none !important;
           }
@@ -1751,7 +1705,7 @@ export class MailerService {
                                           <img
                                             align="center"
                                             border="0"
-                                            src="https://i.ibb.co/YPq663w/image-3.png"
+                                            src="https://i.ibb.co/tXB6xfV/Logo-i-TPM-png-01.png"
                                             alt="Image"
                                             title="Image"
                                             style="
@@ -1763,7 +1717,7 @@ export class MailerService {
                                               border: none;
                                               height: auto;
                                               float: none;
-                                              width: 12%;
+                                              width: 15%;
                                               max-width: 69.6px;
                                             "
                                             width="69.6"
@@ -1801,7 +1755,7 @@ export class MailerService {
                       overflow-wrap: break-word;
                       word-wrap: break-word;
                       word-break: break-word;
-                      background-color: #409192;
+                      background-color: #13684b;
                     "
                   >
                     <div
@@ -2058,8 +2012,7 @@ export class MailerService {
                                           "
                                           >Le hemos enviado este correo como
                                           solicitud de recuperación de contraseña
-                                          por parte de la empresa</span
-                                        >
+                                        </span>
                                       </p>
                                       <p style="font-size: 14px; line-height: 140%">
                                          
@@ -2110,7 +2063,7 @@ export class MailerService {
                                     <div align="left">
                                       <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:52px; v-text-anchor:middle; width:257px;" arcsize="2%"  stroke="f" fillcolor="#18163a"><w:anchorlock/><center style="color:#FFFFFF;"><![endif]-->
                                       <a
-                                        href="https://b0s3x2zk-3000.use2.devtunnels.ms/recoverUpdate/{{id}}/{{email}}"
+                                        href="https://infotpm.netlify.app/recoverUpdate/{{id}}/{{email}}"
                                         id="recovery"
                                         data="{{id}}"
                                         target="_blank"
@@ -2121,8 +2074,8 @@ export class MailerService {
                                           text-decoration: none;
                                           -webkit-text-size-adjust: none;
                                           text-align: center;
-                                          color: #ffffff;
-                                          background-color: #fb9f22;
+                                          color: #212121;
+                                          background-color: #e5c034;
                                           border-radius: 1px;
                                           -webkit-border-radius: 1px;
                                           -moz-border-radius: 1px;
@@ -2234,7 +2187,7 @@ export class MailerService {
                       overflow-wrap: break-word;
                       word-wrap: break-word;
                       word-break: break-word;
-                      background-color: #409192;
+                      background-color: #13684b;
                     "
                   >
                     <div
@@ -2314,7 +2267,7 @@ export class MailerService {
                                             line-height: 19.6px;
                                             color: #ecf0f1;
                                           "
-                                          >Madrid, España</span
+                                          >Zulia, Venezuela</span
                                         >
                                       </p>
                                       <p style="font-size: 14px; line-height: 140%">
@@ -2324,8 +2277,8 @@ export class MailerService {
                                             line-height: 19.6px;
                                             color: #ecf0f1;
                                           "
-                                          >+34 722 85 09 62 |
-                                          remesaespana@gmail.com</span
+                                          >+58 424 672 5408 |
+                                          infotpm3@gmail.com</span
                                         >
                                       </p>
                                     </div>
@@ -2416,32 +2369,7 @@ export class MailerService {
                                                   border-collapse: collapse !important;
                                                   vertical-align: top;
                                                 "
-                                              >
-                                                <a
-                                                  href="https://www.instagram.com/remesaespana/"
-                                                  title="Instagram"
-                                                  target="_blank"
-                                                >
-                                                  <img
-                                                    src="https://i.ibb.co/mhFj6cz/image-2.png"
-                                                    alt="Instagram"
-                                                    title="Instagram"
-                                                    width="32"
-                                                    style="
-                                                      
-                                                      outline: none;
-                                                      text-decoration: none;
-                                                      -ms-interpolation-mode: bicubic;
-                                                      clear: both;
-                                                      display: block !important;
-                                                      border: none;
-                                                      height: auto;
-                                                      float: none;
-                                                      max-width: 32px !important;
-                                                    "
-                                                  />
-                                                </a>
-                                              </td>
+                                              ></td>
                                             </tr>
                                           </tbody>
                                         </table>
@@ -2535,7 +2463,7 @@ export class MailerService {
                       overflow-wrap: break-word;
                       word-wrap: break-word;
                       word-break: break-word;
-                      background-color: #409192;
+                      background-color: #13684b;
                     "
                   >
                     <div
