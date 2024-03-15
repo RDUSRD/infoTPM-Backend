@@ -28,6 +28,11 @@ export class userController {
     return this.userService.findByid(id);
   }
 
+  @Get('email/:email')
+  getByEmail(@Param('email') email: string) {
+    return this.userService.findByEmail(email);
+  }
+
   @Post('create')
   create(@Body() payload: createUserDto) {
     return this.userService.create(payload);
