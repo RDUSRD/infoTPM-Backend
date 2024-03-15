@@ -1,6 +1,5 @@
 import { Controller, Post, Param, NotFoundException } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { AdminService } from 'src/admin/admin.service';
 import { MailerService } from '../mailers/mailers.service';
 import { UserService } from 'src/Usuarios/usuario.service';
 
@@ -9,7 +8,6 @@ import { UserService } from 'src/Usuarios/usuario.service';
 export class mailerController {
   constructor(
     private userService: UserService,
-    private adminService: AdminService,
     private mailerService: MailerService,
   ) {}
 
