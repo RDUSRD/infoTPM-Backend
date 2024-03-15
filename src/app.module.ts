@@ -10,6 +10,7 @@ import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from './config';
 import { AuthModule } from './auth/auth.module';
 import { UserLineModule } from './UserLine/UserLine.module';
 import { busModule } from './busses/bus.module';
+import { mailerModule } from './mailers/mailers.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { busModule } from './busses/bus.module';
     busModule,
     AuthModule,
     UserLineModule,
+    mailerModule,
   ],
 })
 export class AppModule {}
