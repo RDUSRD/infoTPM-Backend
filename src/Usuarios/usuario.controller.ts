@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   ParseIntPipe,
+  NotFoundException,
 } from '@nestjs/common';
 
 import { ApiTags } from '@nestjs/swagger';
@@ -31,6 +32,18 @@ export class userController {
   @Get('email/:email')
   getByEmail(@Param('email') email: string) {
     return this.userService.findByEmail(email);
+  }
+
+  @Put('PasswordRecovery/:id')
+  async updatePasswordRecovery(
+    @Param('id') id: number,
+    @Body() payload: updateUserDto,
+  ) {
+    const user = await this.userService.findByid(id);
+    if (!user) {
+      throw new NotFoundException(`User #${payload.usu_email} not found`);
+    }
+    return this.userService.updatePassword(user.usu_id, payload.usu_password);
   }
 
   @Post('create')
