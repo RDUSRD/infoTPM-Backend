@@ -2686,3 +2686,4 @@ export class MailerService {
     await transporter.sendMail(mailOptions);
   }
 }
+
