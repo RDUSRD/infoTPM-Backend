@@ -35,7 +35,7 @@ class User {
   @OneToMany(() => Comment, (comment) => comment.User)
   comment: Comment[];
 
-  @OneToMany(() => UserLine, (userLine) => userLine.user)
+  @OneToMany(() => UserLine, (userLine) => userLine.user, { cascade: true })
   userLines: UserLine[];
 }
 
