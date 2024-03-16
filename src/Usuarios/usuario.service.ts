@@ -48,7 +48,7 @@ export class UserService {
       where: { usu_id: userId },
     });
 
-    const salt = await bcrypt.gent(10);
+    const salt = await bcrypt.genSalt(10);
     const newPassword = await bcrypt.hash(password, salt);
     user.usu_password = newPassword;
     await this.userRepository.save(user);
