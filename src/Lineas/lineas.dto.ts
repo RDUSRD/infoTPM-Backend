@@ -56,6 +56,24 @@ export class createLineDto {
   @IsPositive()
   @IsNotEmpty()
   readonly lin_price: number;
+
+  @ApiProperty({
+    example: '06:00',
+    type: String,
+    description: 'Hora de inicio de la linea',
+  })
+  @IsString()
+  @IsNotEmpty()
+  readonly lin_scheduleStart: string;
+
+  @ApiProperty({
+    example: '22:00',
+    type: String,
+    description: 'Hora de cierre de la linea',
+  })
+  @IsString()
+  @IsNotEmpty()
+  readonly lin_scheduleEnd: string;
 }
 
 export class updatelineDto extends PartialType(createLineDto) {}

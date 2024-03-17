@@ -26,6 +26,12 @@ class Line {
   @Column()
   lin_price: number;
 
+  @Column()
+  lin_scheduleStart: string;
+
+  @Column()
+  lin_scheduleEnd: string;
+
   @OneToMany(() => Comment, (Comment) => Comment.line)
   comment: Comment[];
 
