@@ -9,10 +9,13 @@ import { createUserDto, updateUserDto } from './usuario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { UserLine } from 'src/UserLine/UserLine.entity';
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectRepository(UserLine)
+    private userLinesRepository: Repository<UserLine>,
   ) {}
 
   async findAll() {
@@ -84,6 +87,9 @@ export class UserService {
       if (!entity) {
         throw new NotFoundException(`User #${usu_id} not found`);
       }
+
+      await this.userLinesRepository.delete({ user: entity });
+
       return await this.userRepository.delete({ usu_id });
     } catch (error) {
       if (error.message.includes('a foreign key constraint fails')) {
