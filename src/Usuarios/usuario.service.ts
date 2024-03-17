@@ -10,12 +10,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { UserLine } from 'src/UserLine/UserLine.entity';
+import { Comment } from 'src/Comentario_Linea/comentario.entity';
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
     @InjectRepository(UserLine)
     private userLinesRepository: Repository<UserLine>,
+    @InjectRepository(Comment) private commentRepository: Repository<Comment>,
   ) {}
 
   async findAll() {
@@ -89,6 +91,8 @@ export class UserService {
       }
 
       await this.userLinesRepository.delete({ user: entity });
+
+      await this.commentRepository.delete({ User: entity });
 
       return await this.userRepository.delete({ usu_id });
     } catch (error) {
